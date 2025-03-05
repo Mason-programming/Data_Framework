@@ -8,10 +8,15 @@ This tool ensures that meshes, rigs, and animations remain synchronized, even wh
 
 Features
 ✅ Multi-DCC Detection & Launch – Scans environment variables to identify installed DCCs and provides a UI to open them from a single interface.
+
 ✅ Live USD File Sharing – Ensures that all connected DCCs are working from the same USD Stage, reducing the need for manual file imports/exports.
+
 ✅ Animation & Rig Synchronization – Automatically retargets animation across different software, compensating for differences in rig structure and constraints.
+
 ✅ Real-Time Scene Updates – Uses USD Stages & Layers to allow non-destructive editing, ensuring modifications in one DCC appear in others.
+
 ✅ Version Control & Collaboration – Integrates with Git/Perforce to manage USD revisions, ensuring project integrity.
+
 ✅ Intuitive PyQt-Based UI – Provides an easy-to-use interface for artists to choose active DCCs, sync settings, and monitor status.
 
 Technology Stack
