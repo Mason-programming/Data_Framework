@@ -7,5 +7,5 @@
 -  Broadcasting updates via gRPC
 -  Receiving and importing scenes into running DCCs
 -  Automatically detecting DCC launches with macOS notifications
-
-💡 ### Built to support collaborative workflows, asset lookdev, and layout/animation tasks across applications using Python, gRPC, Sockets, and OpenUSD.
+  
+### 💡 Built to support collaborative workflows, asset lookdev, and layout/animation tasks across applications using Python, gRPC, Sockets, and OpenUSD.
