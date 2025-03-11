@@ -40,7 +40,9 @@ def show_notification(dcc, usd_path):
     title = f"{DISPLAY_NAMES[dcc]} Launched 🚀"
     message = f"Click to load {usd_path} "
     command = f'display notification "{message}" with title "{title}"'
-    subprocess.run(["osascript", "-e", command])
+    process = subprocess.run(["osascript", "-e", command], capture_output=True, text=True)
+
+    print(process.returncode)
 
 def send_usd_to_blender_via_socket(usd_path):
     try:
@@ -63,7 +65,6 @@ def send_usd_to_unreal_via_socket(usd_path):
 def open_usd_in_dcc(dcc, usd_path):
     if not usd_path:
         return
-
     if dcc == "blender":
         send_usd_to_blender_via_socket(usd_path)
     elif dcc == "unreal": 
