@@ -3,6 +3,12 @@ import bpy
 import socket
 import threading
 
+import os
+usd_file = os.environ.get("USD_FILE_PATH")
+if usd_file:
+    bpy.ops.wm.usd_import(filepath=usd_file)
+    print(f"📥 Imported {usd_file}")
+
 def handle_command(data):
     if data.startswith("IMPORT_USD"):
         path = data.split(":", 1)[1].strip()
