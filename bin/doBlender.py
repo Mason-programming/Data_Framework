@@ -5,21 +5,33 @@ import sys
 import pwd 
 import json 
 
-
 def args(): 
-    pass 
 
+    if len(sys.argv) > 1: 
+        usd_file = sys.argv[1]
+        if usd_file.endswith(".usd") and os.path.exists(usd_file):
+            return usd_file
+        else:
+            print("❌ Please provide a valid .usd file path.")
+            sys.exit(1)
+    else:
+        return 
 
+def save_usd_path(usd_file, username):
+    path_file = f"/Users/{username}/Desktop/USD_Bridge/last_usd_path.txt"
+    with open(path_file, "w") as f:
+        f.write(usd_file)
 
-def load_envos(username): 
+def load_envos(username, args): 
 
     # Set env vars before launching Blender
     os.environ["BLENDER_USE_USD"] = "1"
     os.environ["PYTHONPATH"] = f"/Users/{username}/Desktop/USD_Bridge/modules:" + os.environ.get("PYTHONPATH", "")
     os.environ["USD_PLUGIN_PATH"] = f"/Users/{username}/Desktop/USD_Bridge/plugins"
+    if len(args) != 0: 
+        os.environ["USD_FILE_PATH"] = args
 
 def launch_blender(BLENDER_PATH,BRIDGE_SCRIPT,args): 
-
 
     command = [
 
@@ -48,7 +60,9 @@ if __name__=="__main__":
     BLENDER_PATH = "/Applications/Blender.app/Contents/MacOS/Blender"
     BRIDGE_SCRIPT = f"/Users/{username}/Desktop/USD_Bridge/src/run_in_blender.py"
 
-    load_envos(username) 
+    load_envos(username, gather_args) 
 
     launch_blender(BLENDER_PATH, BRIDGE_SCRIPT, gather_args)
+
+    save_usd_path(gather_args, username)
 
