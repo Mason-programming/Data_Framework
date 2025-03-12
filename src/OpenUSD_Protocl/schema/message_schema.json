@@ -1,0 +1,8 @@
+{
+    "type": "IMPORT_USD",
+    "source": "blender",
+    "department": "Lighting",
+    "file type": "fbx", 
+    "usd_path": "/path/to/scene.usd",
+    "timestamp": "2025-03-11T15:00:00Z"
+  }

@@ -1,4 +1,4 @@
-# 🌐 Universal Live Sync Protocol (ULSP)
+# 🌐 USD Bridge Protocol (UBP)
 
 **A lightweight, open-source protocol for syncing USD scene data across DCCs in real time.**  
 Inspired by the power of Omniverse Live Sync — reimagined as a modular, extendable framework for independent developers and smaller studios.
@@ -39,7 +39,6 @@ A standardized messaging format for real-time communication between DCCs using U
 
 ---
 
-#### 
 +-------------------+         gRPC/Socket         +--------------------+
 |  Blender Client   |  <----------------------->  |  USD Sync Server   |
 |  (Python Addon)   |                            |  (Command Center)   |
