@@ -7,7 +7,7 @@ Inspired by the power of Omniverse Live Sync — reimagined as a modular, extend
 
 ## 🚀 Overview
 
-The **Universal Live Sync Protocol** (ULSP) enables real-time collaboration between Digital Content Creation tools like Blender, Maya, and Unreal Engine through the OpenUSD format. Artists and technical directors can work in different apps while sharing and updating the same scene — seamlessly and live.
+The **USD Bridge Protocol (UBP)** enables real-time collaboration between Digital Content Creation tools like Blender, Maya, and Unreal Engine through the OpenUSD format. Artists and technical directors can work in different apps while sharing and updating the same scene — seamlessly and live.
 
 ---
 
