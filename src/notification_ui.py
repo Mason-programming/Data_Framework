@@ -37,12 +37,13 @@ def is_dcc_running(dcc_name):
     return False
 
 def show_notification(dcc, usd_path):
+    # 
     title = f"{DISPLAY_NAMES[dcc]} Launched 🚀"
-    message = f"Click to load {usd_path} "
-    command = f'display notification "{message}" with title "{title}"'
-    process = subprocess.run(["osascript", "-e", command], capture_output=True, text=True)
-
-    print(process.returncode)
+    try:
+        subprocess.run(["~/USD_Bridge/src/MyNotification.App/Contents/MacOS/notify", DISPLAY_NAMES[dcc, usd_path]])
+        print(f"🔔 Notification sent for {dcc}")
+    except Exception as e:
+        print(f"❌ Notification failed: {e}")
 
 def send_usd_to_blender_via_socket(usd_path):
     try:

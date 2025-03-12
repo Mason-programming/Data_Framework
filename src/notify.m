@@ -27,16 +27,17 @@ void sendNotification(NSString *dccName) {
 }
 
 void requestNotificationPermissionAndNotify(NSString *dccName) {
-    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
 
-    [center requestAuthorizationWithOptions:(UNAuthorizationOptionAlert + UNAuthorizationOptionSound)
-                          completionHandler:^(BOOL granted, NSError * _Nullable error) {
-        if (granted) {
-            sendNotification(dccName);
-        } else {
-            NSLog(@"⚠️ Notification permission denied.");
-        }
-    }];
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        [center requestAuthorizationWithOptions:(UNAuthorizationOptionAlert + UNAuthorizationOptionSound)
+                            completionHandler:^(BOOL granted, NSError * _Nullable error) {
+            if (!granted) {
+                NSLog(@"⚠️ Notification permission denied.");
+            } else {
+                NSLog(@"✅ Notification permission granted.");
+                // Continue with sending notification here if needed
+            }
+        }];
 }
 
 int main(int argc, const char * argv[]) {
