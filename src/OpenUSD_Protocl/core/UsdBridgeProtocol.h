@@ -4,6 +4,7 @@
 #include <map>
 #include <functional>
 #include <vector>
+#include <nlohmann/json.hpp>
 
 enum class MessageType{ 
 
@@ -12,6 +13,7 @@ enum class MessageType{
     SYNC_ANIMATION,
     UPDATE_MATERIAL,
     CAD_FILE, 
+    FBX_FILE, 
     HEARTBEAT,
     UNKNOWN
 
@@ -26,6 +28,7 @@ struct UsdBridgeMessage
     std::string file_type;
     std::string usd_path;
     std::string timestamp;
+    std:string file_path; 
 
 }; 
 
@@ -45,10 +48,10 @@ class UsdBridgeProtocol
     void registerHandler(MessageType type, std::function<void(const UsdBridgeMessage&)> handler);
 
     // Dispatch incoming message to appropriate handler
-    void dispatch(const std::string& rawJson);
+    void dispatch(const UsdBridgeMessage& message);
 
     private: 
-    std::map<MessageType, std::function<void(const UsdBridgeMessage&)>> handlers;
+    std::map<MessageType, std::function<void(const UsdBridgeMessage&)>> handlers_;
 
     // Helper to convert string to MessageType
     MessageType parseType(const std::string& typeStr);
