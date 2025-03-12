@@ -1,28 +1,34 @@
-#!/bin/bash
+#!/bin/zsh
 
-echo "🎛️ Welcome to the Custom USD Bridge Shell"
-export USD_MODE=1
-export DCC_CONTEXT="blender"
+# Full path to your bin directory
+BRIDGE_PATH="$HOME/Desktop/USD_Bridge/bin"
+DOBLENDER_SCRIPT="$BRIDGE_PATH/doBlender.py"
+TARGET="$BRIDGE_PATH/doblender"
 
-# Define custom aliases
-#!/bin/bash
+echo "🔧 Setting up your USD Bridge CLI..."
 
-# Set up environment variables for your USD Bridge project
-export USD_BRIDGE_DIR=~/Desktop/USD_Bridge
-export PYTHONPATH="$USD_BRIDGE_DIR/modules:$PYTHONPATH"
-export USD_PLUGIN_PATH="$USD_BRIDGE_DIR/plugins"
+# Rename script if it's still doBlender.py
+if [ -f "$DOBLENDER_SCRIPT" ]; then
+    mv "$DOBLENDER_SCRIPT" "$TARGET"
+    echo "✅ Renamed doBlender.py → doblender"
+fi
 
-# Optional: Add the doBlender script to your PATH if not already
-export PATH="$USD_BRIDGE_DIR/bin:$PATH"
+# Make it executable
+chmod +x "$TARGET"
+echo "✅ Made doblender executable"
 
-# Create an alias for easy access
-alias doBlender="python3 $USD_BRIDGE_DIR/bin/doBlender.py"
+# Check if bin path is already in .zshrc
+if ! grep -q "$BRIDGE_PATH" ~/.zshrc; then
+    echo "🔗 Adding $BRIDGE_PATH to PATH in ~/.zshrc"
+    echo "\n# USD Bridge custom CLI" >> ~/.zshrc
+    echo "export PATH=\"\$PATH:$BRIDGE_PATH\"" >> ~/.zshrc
+    echo "✅ PATH updated in ~/.zshrc"
+else
+    echo "📌 Path already exists in ~/.zshrc"
+fi
 
-# (Optional) Make sure the script is executable
-chmod +x "$USD_BRIDGE_DIR/bin/doBlender.py"
+# Source .zshrc to update current session
+source ~/.zshrc
+hash -r
 
-echo "✅ USD Bridge shell ready. Run: doBlender"
-
-
-# Drop into subshell
-bash --rcfile <(cat ~/.bashrc; declare -f; echo "PS1='[usd-bridge] \$PS1'")
+echo "🎉 You're ready to use \`doblender\` from any directory!"
