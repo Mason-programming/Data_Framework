@@ -1,13 +1,17 @@
 #!/usr/bin/env python3
-import os 
+import os
+import sys
 import subprocess 
-import sys 
 
-# Dynamically add the path to the src directory
-sys.path.append(os.path.join(os.path.dirname(__file__), "..", "src"))
+# Dynamically find the absolute path to the repo root and src directory
+current_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.abspath(os.path.join(current_dir, ".."))
+src_path = os.path.join(project_root, "src")
 
+# Add src to PYTHONPATH
+sys.path.insert(0, src_path)
 
-from src.dcc_commands.commands import Commands
+from dcc_commands.commands import Commands
 
 # Blender-specific subclass
 class BlenderLauncher(Commands):

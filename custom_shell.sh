@@ -1,34 +1,45 @@
-#!/bin/zsh
+#!/bin/bash
 
-# Full path to your bin directory
-BRIDGE_PATH="$HOME/Desktop/USD_Bridge/bin"
-DOBLENDER_SCRIPT="$BRIDGE_PATH/doBlender.py"
-TARGET="$BRIDGE_PATH/doblender"
+# Run in a subshell to avoid modifying current shell env
+(
+    echo "🛠️ Setting up USD Bridge tools..."
 
-echo "🔧 Setting up your USD Bridge CLI..."
+    # Paths
+    USD_BRIDGE_DIR="$HOME/Desktop/USD_Bridge/bin"
+    DOBLENDER_PATH="$USD_BRIDGE_DIR/doblender"
+    DOUNREAL_PATH="$USD_BRIDGE_DIR/dounreal"
 
-# Rename script if it's still doBlender.py
-if [ -f "$DOBLENDER_SCRIPT" ]; then
-    mv "$DOBLENDER_SCRIPT" "$TARGET"
-    echo "✅ Renamed doBlender.py → doblender"
-fi
+    # Setup doblender
+    echo "⚙️ Setting up 'doblender'..."
+    if [ ! -f "$DOBLENDER_PATH" ]; then
+        echo "🚨 Error: doblender script not found at $DOBLENDER_PATH"
+    else
+        chmod +x "$DOBLENDER_PATH"
+        echo "✅ Made doblender executable"
 
-# Make it executable
-chmod +x "$TARGET"
-echo "✅ Made doblender executable"
+        if [ ! -L /usr/local/bin/doblender ]; then
+            echo "🔗 Creating symlink to /usr/local/bin/doblender..."
+            sudo ln -s "$DOBLENDER_PATH" /usr/local/bin/doblender
+        else
+            echo "ℹ️ 'doblender' symlink already exists"
+        fi
+    fi
 
-# Check if bin path is already in .zshrc
-if ! grep -q "$BRIDGE_PATH" ~/.zshrc; then
-    echo "🔗 Adding $BRIDGE_PATH to PATH in ~/.zshrc"
-    echo "\n# USD Bridge custom CLI" >> ~/.zshrc
-    echo "export PATH=\"\$PATH:$BRIDGE_PATH\"" >> ~/.zshrc
-    echo "✅ PATH updated in ~/.zshrc"
-else
-    echo "📌 Path already exists in ~/.zshrc"
-fi
+    # Setup dounreal
+    echo "⚙️ Setting up 'dounreal'..."
+    if [ ! -f "$DOUNREAL_PATH" ]; then
+        echo "🚨 Error: dounreal script not found at $DOUNREAL_PATH"
+    else
+        chmod +x "$DOUNREAL_PATH"
+        echo "✅ Made dounreal executable"
 
-# Source .zshrc to update current session
-source ~/.zshrc
-hash -r
+        if [ ! -L /usr/local/bin/dounreal ]; then
+            echo "🔗 Creating symlink to /usr/local/bin/dounreal..."
+            sudo ln -s "$DOUNREAL_PATH" /usr/local/bin/dounreal
+        else
+            echo "ℹ️ 'dounreal' symlink already exists"
+        fi
+    fi
 
-echo "🎉 You're ready to use \`doblender\` from any directory!"
+    echo "🎉 Setup complete! You can now use 'doblender' and 'dounreal' from any terminal."
+)
