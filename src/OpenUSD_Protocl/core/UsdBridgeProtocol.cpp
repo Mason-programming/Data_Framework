@@ -25,10 +25,12 @@ UsdBridgeMessage UsdBridgeProtocol::parseMessage(const std::string& rawJson)
 
 void UsdBridgeProtocol::registerHandler(MessageType type,std::function<void(const UsdBridgeMessage&)> handler) {
     handlers_[type] = handler;
-
-    
 }
 
+std::vector<uint8_t> UsdBridgeProtocol::buildPacket(const UsdBridgeMessage& msg){
+
+    return 
+}
 
 
 void UsdBridgeProtocol::dispatch(const UsdBridgeMessage& message)

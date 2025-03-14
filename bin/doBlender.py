@@ -18,7 +18,7 @@ class BlenderLauncher(Commands):
     def __init__(self):
         super().__init__()
         self.blender_path = "/Applications/Blender.app/Contents/MacOS/Blender"
-        self.bridge_script = f"/Users/{self.username}/Desktop/USD_Bridge/src/run_in_blender.py"
+        self.bridge_script = f"/Users/{self.username}/Desktop/USD_Bridge/src/bridge_scripts/run_in_blender.py"
 
     def load_env(self):
         os.environ["BLENDER_USE_USD"] = "1"
@@ -38,7 +38,6 @@ class BlenderLauncher(Commands):
                 stdin=subprocess.DEVNULL,
                 start_new_session=True
             )
-            print("🎬 Blender launched and listening on port 5566.")
         except Exception as e:
             print(f"🚨 Failed to launch Blender: {e}")
 

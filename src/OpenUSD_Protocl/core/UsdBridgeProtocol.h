@@ -22,21 +22,31 @@ enum class MessageType{
 // The usd message structure 
 struct UsdBridgeMessage
 { 
+    uint8_t version; 
     MessageType type;
     std::string source;
     std::string department;
     std::string file_type;
     std::string usd_path;
     std::string timestamp;
-    std:string file_path; 
+    std::string file_path; 
 
 }; 
+
+struct PacketHeader
+{ 
+    uint16_t route_id; 
+    uint16_t payload_size; 
+}
 
 class UsdBridgeProtocol
 { 
     public: 
     UsdBridgeProtocol();
     ~UsdBridgeProtocol();
+
+    std::vector<uint8_t> buildPacket(const UsdBridgeMessage& msg);
+    UsdBridgeMessage parsePacket(const std::vector<uint8_t>& buffer);
 
     // Deserialize JSON into a usable C++ message
     UsdBridgeMessage parseMessage(const std::string& rawJson);
