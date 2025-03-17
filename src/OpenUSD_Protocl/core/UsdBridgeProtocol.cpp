@@ -28,7 +28,9 @@ void UsdBridgeProtocol::registerHandler(MessageType type,std::function<void(cons
 }
 
 std::vector<uint8_t> UsdBridgeProtocol::buildPacket(const UsdBridgeMessage& msg){
+    std::string jsonStr = toJson(msg); 
 
+    PacketHeader 
     return 
 }
 

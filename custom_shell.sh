@@ -2,6 +2,7 @@
 
 # Run in a subshell to avoid modifying current shell env
 (
+    
     echo "🛠️ Setting up USD Bridge tools..."
 
     # Paths

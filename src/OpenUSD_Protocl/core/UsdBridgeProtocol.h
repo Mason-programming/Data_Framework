@@ -45,6 +45,7 @@ class UsdBridgeProtocol
     UsdBridgeProtocol();
     ~UsdBridgeProtocol();
 
+    // Parse 
     std::vector<uint8_t> buildPacket(const UsdBridgeMessage& msg);
     UsdBridgeMessage parsePacket(const std::vector<uint8_t>& buffer);
 

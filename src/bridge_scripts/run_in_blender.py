@@ -1,8 +1,11 @@
 import bpy
 import threading
 import os
+import socket
 
-# Safe check
+PORT = 5566
+
+# Import if USD file provided via env
 usd_file = os.environ.get("USD_FILE_PATH")
 if usd_file and os.path.exists(usd_file):
     bpy.ops.wm.usd_import(filepath=usd_file)
@@ -20,10 +23,9 @@ def handle_command(data):
 
 def start_socket_listener():
     try:
-        import socket
         server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        server.bind(("0.0.0.0", 5566))
-        print(f"✅ Socket bound to localhost:{port}")
+        server.bind(("0.0.0.0", PORT))
+        print(f"✅ Socket bound to localhost:{PORT}")
         server.listen(1)
         print("🧠 Blender listening on port 5566...")
         while True:
@@ -34,7 +36,7 @@ def start_socket_listener():
     except Exception as e:
         print(f"🔥 Socket error: {e}")
 
-# Launch in background
+# Launch socket listener in background thread
 thread = threading.Thread(target=start_socket_listener, daemon=True)
 thread.start()
 print("🔌 Socket listener started")
