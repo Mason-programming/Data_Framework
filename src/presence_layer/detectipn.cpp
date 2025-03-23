@@ -8,6 +8,15 @@
 // Filled with helper methods
 #include "notification.cpp"
 
+struct process
+{
+    std::string processName; 
+    int status; 
+    int waitingTime; 
+    int turnAroundTime; 
+    int burstTime; 
+}
+
 
 class detection {
     public: 
@@ -16,37 +25,34 @@ class detection {
 
     virtual pid_t* whoIsActive()
     { 
-        
+
         
     }
 
     bool isProcessRunning(pid_t pid)
     { 
-    if(ptrace(PTRACE_ATTACH, pid, nullptr, nullptr) == -1)
-    {
-        if(errno == ESRCH)
+        if(ptrace(PTRACE_ATTACH, pid, nullptr, nullptr) == -1)
         {
-            return false; 
+            if(errno == ESRCH)
+            {
+                return false; 
+            }
+            else if (errno == EPERM)
+            { 
+                return true; 
+            }
+            else{
+                perror("ptrace attach"); 
+                return false; 
+            }
         }
-        else if (errno == EPERM)
-        { 
-            return true; 
-        }
-        else{
-            perror("ptrace attach"); 
-            return false; 
-        }
+
+        int status; 
+        waitpid(pid, &status, 0); 
+        ptrace(PTRACE_DETACH, pid, nullptr, nullptr); 
+
+        return true; 
     }
-
-    int status; 
-    waitpid(pid, &status, 0); 
-    ptrace(PTRACE_DETACH, pid, nullptr, nullptr); 
-
-    return true; 
-}
-
-
-
     private: 
     pid_t process;
     int status; 

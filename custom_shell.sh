@@ -1,11 +1,23 @@
 #!/bin/bash
 
+
 # Run in a subshell to avoid modifying current shell env
 (
-    
-    echo "🛠️ Setting up USD Bridge tools..."
+    export PS1="USD Shell& "
 
-    # Paths
+    echo "We need to add a path to consume the USD library" 
+    USDLIBRARY_PATH="$HOME/Documents/"
+    PXR_PATH= ""
+
+    if [ -f "$USDLIBRARY_PATH"]; then 
+        echo "Welcome to the USD Bridge!!!"
+        chmod +x "$USDLIBRARY_PATH" 
+    else 
+        echo "Could not find the path of a functional USD Library" 
+    fi 
+
+    echo "🛠️ Setting up USD Bridge tools..."
+    # USD Bridge Paths
     USD_BRIDGE_DIR="$HOME/Desktop/USD_Bridge/bin"
     DOBLENDER_PATH="$USD_BRIDGE_DIR/doblender"
     DOUNREAL_PATH="$USD_BRIDGE_DIR/dounreal"
@@ -42,5 +54,12 @@
         fi
     fi
 
+    my_leave(){
+    echo "Good bye" 
+    exit 
+    }
+
     echo "🎉 Setup complete! You can now use 'doblender' and 'dounreal' from any terminal."
+    exec bash --noprofile --norc -i
+
 )
