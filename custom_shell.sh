@@ -3,11 +3,20 @@
 
 # Run in a subshell to avoid modifying current shell env
 (
-    export PS1="USD Shell& "
+    export PS1="USD Shell ➜ \w \$ "
 
     echo "We need to add a path to consume the USD library" 
-    USDLIBRARY_PATH="$HOME/Documents/"
-    PXR_PATH= ""
+
+    # Setting up enviorment to use OpenUSD 
+    export USD_INSTALL_DIR="$HOME/Desktop/my_usd_install_dir"
+    export PATH="$HOME/Desktop/my_usd_install_dir/bin:$PATH"
+    export PYTHONPATH="$USD_INSTALL_DIR/lib/python:$PYTHONPATH"
+    export DYLD_LIBRARY_PATH="$USD_INSTALL_DIR/lib:$DYLD_LIBRARY_PATH"
+    export PATH="$USD_INSTALL_DIR/bin:$PATH"
+
+    # Setting yp enviorment to use Command Center 
+    
+
 
     if [ -f "$USDLIBRARY_PATH"]; then 
         echo "Welcome to the USD Bridge!!!"
@@ -19,8 +28,9 @@
     echo "🛠️ Setting up USD Bridge tools..."
     # USD Bridge Paths
     USD_BRIDGE_DIR="$HOME/Desktop/USD_Bridge/bin"
+    USD_COMMANDCENTER="$HOME/Desktop/USD_Bridge/src/"
     DOBLENDER_PATH="$USD_BRIDGE_DIR/doblender"
-    DOUNREAL_PATH="$USD_BRIDGE_DIR/dounreal"
+    DOUNREAL_PATH="$USD_BRIDGE_DIR/dounreal]"
 
     # Setup doblender
     echo "⚙️ Setting up 'doblender'..."
@@ -54,12 +64,9 @@
         fi
     fi
 
-    my_leave(){
-    echo "Good bye" 
-    exit 
-    }
+    echo "starting background notification" 
+   # $HOME/Desktop/USD_Bridge/src/my_tool
 
-    echo "🎉 Setup complete! You can now use 'doblender' and 'dounreal' from any terminal."
-    exec bash --noprofile --norc -i
-
+    echo "🎉 Setup complete! Have fun!!"
+    exec bash --noprofile --norc -i 
 )
