@@ -30,6 +30,7 @@ class BlenderLauncher(Commands):
             self.blender_path,
             "--python", self.bridge_script
         ]
+
         try:
             subprocess.Popen(
                 command,
@@ -39,7 +40,7 @@ class BlenderLauncher(Commands):
                 start_new_session=True
             )
         except Exception as e:
-            print(f"🚨 Failed to launch Blender: {e}")
+            print(f"Failed to launch Blender: {e}")
 
 if __name__ == "__main__":
     do_blender = BlenderLauncher()

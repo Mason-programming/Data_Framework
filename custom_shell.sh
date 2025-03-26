@@ -15,7 +15,7 @@
     export PATH="$USD_INSTALL_DIR/bin:$PATH"
 
     # Setting yp enviorment to use Command Center 
-    
+
 
 
     if [ -f "$USDLIBRARY_PATH"]; then 
@@ -30,7 +30,7 @@
     USD_BRIDGE_DIR="$HOME/Desktop/USD_Bridge/bin"
     USD_COMMANDCENTER="$HOME/Desktop/USD_Bridge/src/"
     DOBLENDER_PATH="$USD_BRIDGE_DIR/doblender"
-    DOUNREAL_PATH="$USD_BRIDGE_DIR/dounreal]"
+    DOUNREAL_PATH="$USD_BRIDGE_DIR/dounreal.py]"
 
     # Setup doblender
     echo "⚙️ Setting up 'doblender'..."
@@ -68,5 +68,7 @@
    # $HOME/Desktop/USD_Bridge/src/my_tool
 
     echo "🎉 Setup complete! Have fun!!"
+
+
     exec bash --noprofile --norc -i 
 )
