@@ -2,6 +2,7 @@
 import os
 import sys
 import subprocess 
+from scene_bus.client import SceneBusClient
 
 # Dynamically find the absolute path to the repo root and src directory
 current_dir = os.path.dirname(os.path.abspath(__file__))

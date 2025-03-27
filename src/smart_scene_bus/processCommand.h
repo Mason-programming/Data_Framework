@@ -2,6 +2,11 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <unistd.h>
+#include <iostream> 
+#include <sstream>
+#include <queue>
+#include <deque>
 
 class ProcessCommand {
 public:
@@ -12,6 +17,7 @@ public:
     std::string getProcessInfo() const;
     std::string getActiveStage() const;
     std::string getDepartment() const;
+    static std::queue<ProcessCommand> launchedProcesses;
 
     void setArgs(const std::vector<std::string>& arguments);
     void setEnvVariables();           // Write USD path and dept to environment
