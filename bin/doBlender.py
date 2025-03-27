@@ -35,9 +35,6 @@ class BlenderLauncher(Commands):
         info = cmd.getProcessInfo()
         print(info)
 
-    
-        
-
 if __name__ == "__main__":
     do_blender = BlenderLauncher()
     do_blender.base_env()
