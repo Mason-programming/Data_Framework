@@ -2,7 +2,7 @@
 import os
 import sys
 import subprocess 
-from scene_bus.client import SceneBusClient
+
 
 # Dynamically find the absolute path to the repo root and src directory
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -20,33 +20,22 @@ class BlenderLauncher(Commands):
         super().__init__()
         self.blender_path = "/Applications/Blender.app/Contents/MacOS/Blender"
         self.bridge_script = f"/Users/{self.username}/Desktop/USD_Bridge/src/bridge_scripts/run_in_blender.py"
-
-    def load_env(self):
         os.environ["BLENDER_USE_USD"] = "1"
-        if self.usd_file:
-            os.environ["USD_FILE_PATH"] = self.usd_file
-
+        
     def launch_blender(self):
-        command = [
-            self.blender_path,
-            "--python", self.bridge_script
-        ]
+        import processBridge 
 
-        try:
-            subprocess.Popen(
-                command,
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-                stdin=subprocess.DEVNULL,
-                start_new_session=True
-            )
+        try: 
+            cmd = processBridge.processCommand(self.blender_path, self.usd_file, "layout")
+            cmd.launch()
+            print(self.bridge_script) 
+
         except Exception as e:
             print(f"Failed to launch Blender: {e}")
 
 if __name__ == "__main__":
     do_blender = BlenderLauncher()
     do_blender.base_env()
-    do_blender.load_env()
     do_blender.launch_blender()
     if do_blender.usd_file:
         do_blender.save_usd_path()

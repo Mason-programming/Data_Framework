@@ -5,8 +5,7 @@ import socket
 
 # Import if USD file provided via env
 usd_file = os.environ.get("USD_FILE_PATH")
-print(usd_file)
-print("HELLLLLO")
+
 if usd_file and os.path.exists(usd_file):
     bpy.ops.wm.usd_import(filepath=usd_file)
     print(f"📥 Imported {usd_file}")
