@@ -38,6 +38,7 @@ void ProcessCommand::launch(){
     {
         std::cout << "Launched " << dccName << " with PID: " << pid << std::endl;
         launchedProcesses.push(*this);
+        
     }
     else {
         std::cerr << "Fork failed" << std::endl; 

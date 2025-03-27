@@ -1,0 +1,3 @@
+/Users/masonkirby/Desktop/USD_Bridge/src/smart_scene_bus/build/CMakeFiles/processbridge.dir
+/Users/masonkirby/Desktop/USD_Bridge/src/smart_scene_bus/build/CMakeFiles/edit_cache.dir
+/Users/masonkirby/Desktop/USD_Bridge/src/smart_scene_bus/build/CMakeFiles/rebuild_cache.dir

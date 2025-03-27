@@ -1,1 +1,1 @@
-SirArchibald/stage.usd
+/Users/masonkirby/Desktop/test_usd/SirArchibald/stage.usd

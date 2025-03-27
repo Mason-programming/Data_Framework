@@ -2,6 +2,7 @@
 import os
 import sys
 import subprocess 
+from processbridge import ProcessCommand
 
 
 # Dynamically find the absolute path to the repo root and src directory
@@ -23,15 +24,19 @@ class BlenderLauncher(Commands):
         os.environ["BLENDER_USE_USD"] = "1"
         
     def launch_blender(self):
-        import processBridge 
-
         try: 
-            cmd = processBridge.processCommand(self.blender_path, self.usd_file, "layout")
+            cmd = ProcessCommand(self.blender_path, self.usd_file, "layout")
             cmd.launch()
             print(self.bridge_script) 
 
         except Exception as e:
             print(f"Failed to launch Blender: {e}")
+
+        info = cmd.getProcessInfo()
+        print(info)
+
+    
+        
 
 if __name__ == "__main__":
     do_blender = BlenderLauncher()
