@@ -1,0 +1,14 @@
+[
+  {
+    "module": "plugins.test_button",
+    "class": "MyOperator"
+  },
+  {
+    "module": "plugins.run_asset_book",
+    "class": "AssetBookPlugin"
+  },
+  {
+    "module": "plugins.export",
+    "class": "ExportAssetOperator"
+  }
+]

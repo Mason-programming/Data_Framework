@@ -4,7 +4,7 @@ import sys
 import pwd
 import subprocess
 
-# Add USD_Bridge/src to PYTHONPATH
+# Add Data_Framework/src to PYTHONPATH
 real_script_path = os.path.realpath(__file__)
 project_root = os.path.abspath(os.path.join(os.path.dirname(real_script_path), ".."))
 src_path = os.path.join(project_root, "src")

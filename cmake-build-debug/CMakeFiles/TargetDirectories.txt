@@ -1,0 +1,5 @@
+/Users/masonkirby/Desktop/Data_Framework/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/masonkirby/Desktop/Data_Framework/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/masonkirby/Desktop/Data_Framework/cmake-build-debug/src/sharedData/CMakeFiles/shared_data_server.dir
+/Users/masonkirby/Desktop/Data_Framework/cmake-build-debug/src/sharedData/CMakeFiles/edit_cache.dir
+/Users/masonkirby/Desktop/Data_Framework/cmake-build-debug/src/sharedData/CMakeFiles/rebuild_cache.dir

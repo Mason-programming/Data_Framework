@@ -3,6 +3,23 @@
 
 # Run in a subshell to avoid modifying current shell env
 (
+        # 1. Create a virtual environment
+    python3 -m venv ~/usd_venv
+
+    # 2. Activate it
+    source ~/usd_venv/bin/activate
+
+    echo "🔍 Checking for PySide6 and PyOpenGL..."
+
+    # Check for PySide6
+    python3 -c "import PySide6" 2>/dev/null && echo '✅ PySide6 is installed' || echo '❌ PySide6 is NOT installed'
+
+    # Check for PyOpenGL
+    python3 -c "import OpenGL" 2>/dev/null && echo '✅ PyOpenGL is installed' || echo '❌ PyOpenGL is NOT installed'
+
+    # 3. Install PySide6 inside the virtual env
+    pip install PySide6
+
     export PS1="USD Shell ➜ \w \$ "
 
     echo "We need to add a path to consume the USD library" 
@@ -15,8 +32,6 @@
     export PATH="$USD_INSTALL_DIR/bin:$PATH"
 
     # Setting yp enviorment to use Command Center 
-
-
 
     if [ -f "$USDLIBRARY_PATH"]; then 
         echo "Welcome to the USD Bridge!!!"
@@ -65,10 +80,10 @@
     fi
 
     echo "starting background notification" 
-   # $HOME/Desktop/USD_Bridge/src/my_tool
+   # $HOME/Desktop/Data_Framework/src/my_tool
 
     echo "🎉 Setup complete! Have fun!!"
-
+    $HOME//Desktop/Data_Framework/test_usd_env.sh
 
     exec bash --noprofile --norc -i 
 )

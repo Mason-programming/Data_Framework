@@ -1,38 +1,38 @@
 import bpy
-import threading
+import sys
 import os
-import socket
 
-# Import if USD file provided via env
+# Safe path setup
+current_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.abspath(os.path.join(current_dir, "..", ".."))
+src_dir = os.path.join(project_root, "src")
+plugins_dir = os.path.join(project_root, "plugins")
+
+# Insert to sys.path
+for path in [src_dir, project_root, plugins_dir]:
+    if path not in sys.path:
+        sys.path.insert(0, path)
+
+# Pull in PYTHONPATH if provided
+env_paths = os.environ.get("PYTHONPATH", "")
+for path in env_paths.split(":"):
+    if path and path not in sys.path:
+        sys.path.insert(0, path)
+
+# Debug sys.path
+print("🔍 sys.path inside Blender:")
+for p in sys.path:
+    print(p)
+
+# Register plugin
+try:
+    from plugins.custome_blender import register
+    register()
+except Exception as e:
+    print(f"❌ Plugin registration failed: {e}")
+
+# Import USD file if set
 usd_file = os.environ.get("USD_FILE_PATH")
-
 if usd_file and os.path.exists(usd_file):
+    print(f"📥 Importing USD: {usd_file}")
     bpy.ops.wm.usd_import(filepath=usd_file)
-    print(f"📥 Imported {usd_file}")
-
-def handle_command(data):
-    print(f"🔄 Received command: {data}")
-    if data.startswith("IMPORT_USD:"):
-        path = data.split(":", 1)[1].strip()
-        if os.path.exists(path):
-            bpy.ops.wm.usd_import(filepath=path)
-            print(f"📥 Re-imported {path}")
-        else:
-            print(f"❌ USD file not found: {path}")
-
-def start_socket_listener():
-     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-     server.bind(("localhost", 5566))
-     server.listen(1)
-     print("🧠 Blender listening on port 5566...")
-     while True:
-         conn, _ = server.accept()
-         data = conn.recv(1024).decode("utf-8")
-         handle_command(data)
-         conn.close()
-
-# Launch socket listener in background thread
-thread = threading.Thread(target=start_socket_listener, daemon=True)
-thread.start()
-print("🔌 Socket listener started")
-
