@@ -1,7 +1,7 @@
-import subprocess
-import sys
 import os
+import sys
 import bpy
+import asset_book
 
 # Get repo root → one level above /src and /plugins
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -17,8 +17,7 @@ class AssetBookPlugin(bpy.types.Operator):
 
     def execute(self, context):
         try:
-            script_path = "/Users/masonkirby/Desktop/Data_Framework/plugins/asset_book.py"
-            subprocess.Popen([sys.executable, script_path])
+            asset_book.start()
             self.report({'INFO'}, "✅ Launched external Asset Book UI.")
             return {'FINISHED'}
         except Exception as e:

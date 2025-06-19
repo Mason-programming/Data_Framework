@@ -1,0 +1,8 @@
+/Users/masonkirby/Desktop/Data_Framework/build/CMakeFiles/edit_cache.dir
+/Users/masonkirby/Desktop/Data_Framework/build/CMakeFiles/rebuild_cache.dir
+/Users/masonkirby/Desktop/Data_Framework/build/src/sharedData/CMakeFiles/shared_data_server.dir
+/Users/masonkirby/Desktop/Data_Framework/build/src/sharedData/CMakeFiles/edit_cache.dir
+/Users/masonkirby/Desktop/Data_Framework/build/src/sharedData/CMakeFiles/rebuild_cache.dir
+/Users/masonkirby/Desktop/Data_Framework/build/src/blender_usd_delegate/CMakeFiles/blender_usd_node.dir
+/Users/masonkirby/Desktop/Data_Framework/build/src/blender_usd_delegate/CMakeFiles/edit_cache.dir
+/Users/masonkirby/Desktop/Data_Framework/build/src/blender_usd_delegate/CMakeFiles/rebuild_cache.dir

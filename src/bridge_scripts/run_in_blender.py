@@ -1,6 +1,7 @@
+import os
 import bpy
 import sys
-import os
+import pip
 
 # Safe path setup
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -23,6 +24,9 @@ for path in env_paths.split(":"):
 print("🔍 sys.path inside Blender:")
 for p in sys.path:
     print(p)
+
+pip.main(['install', 'PySide6'])
+pip.main(['install', 'pybind11'])
 
 # Register plugin
 try:

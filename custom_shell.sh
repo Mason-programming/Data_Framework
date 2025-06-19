@@ -9,17 +9,6 @@
     # 2. Activate it
     source ~/usd_venv/bin/activate
 
-    echo "🔍 Checking for PySide6 and PyOpenGL..."
-
-    # Check for PySide6
-    python3 -c "import PySide6" 2>/dev/null && echo '✅ PySide6 is installed' || echo '❌ PySide6 is NOT installed'
-
-    # Check for PyOpenGL
-    python3 -c "import OpenGL" 2>/dev/null && echo '✅ PyOpenGL is installed' || echo '❌ PyOpenGL is NOT installed'
-
-    # 3. Install PySide6 inside the virtual env
-    pip install PySide6
-
     export PS1="USD Shell ➜ \w \$ "
 
     echo "We need to add a path to consume the USD library" 
@@ -45,16 +34,17 @@
     USD_BRIDGE_DIR="$HOME/Desktop/USD_Bridge/bin"
     USD_COMMANDCENTER="$HOME/Desktop/USD_Bridge/src/"
     DOBLENDER_PATH="$USD_BRIDGE_DIR/doblender"
-    DOUNREAL_PATH="$USD_BRIDGE_DIR/dounreal.py]"
+    DOUNREAL_PATH="$USD_BRIDGE_DIR/dounreal.py"
 
     # Setup doblender
     echo "⚙️ Setting up 'doblender'..."
     if [ ! -f "$DOBLENDER_PATH" ]; then
-        echo "🚨 Error: doblender script not found at $DOBLENDER_PATH"
+        echo " Error: doblender script not found at $DOBLENDER_PATH"
+        echo "Attempting to set it up"
+        export PATH="$HOME/Desktop/Data_Framework/bin/doBlender.py"
     else
         chmod +x "$DOBLENDER_PATH"
         echo "✅ Made doblender executable"
-
         if [ ! -L /usr/local/bin/doblender ]; then
             echo "🔗 Creating symlink to /usr/local/bin/doblender..."
             sudo ln -s "$DOBLENDER_PATH" /usr/local/bin/doblender
@@ -63,27 +53,10 @@
         fi
     fi
 
-    # Setup dounreal
-    echo "⚙️ Setting up 'dounreal'..."
-    if [ ! -f "$DOUNREAL_PATH" ]; then
-        echo "🚨 Error: dounreal script not found at $DOUNREAL_PATH"
-    else
-        chmod +x "$DOUNREAL_PATH"
-        echo "✅ Made dounreal executable"
 
-        if [ ! -L /usr/local/bin/dounreal ]; then
-            echo "🔗 Creating symlink to /usr/local/bin/dounreal..."
-            sudo ln -s "$DOUNREAL_PATH" /usr/local/bin/dounreal
-        else
-            echo "ℹ️ 'dounreal' symlink already exists"
-        fi
-    fi
 
     echo "starting background notification" 
    # $HOME/Desktop/Data_Framework/src/my_tool
-
-    echo "🎉 Setup complete! Have fun!!"
-    $HOME//Desktop/Data_Framework/test_usd_env.sh
 
     exec bash --noprofile --norc -i 
 )
