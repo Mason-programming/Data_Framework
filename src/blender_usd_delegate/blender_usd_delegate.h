@@ -12,36 +12,42 @@
 #include <pxr/base/gf/matrix4d.h>
 #include <pxr/base/gf/vec3d.h>
 
+#include "../sharedData/sharedData.h"
 #include <iostream>
 #include <algorithm>
 #include <filesystem>
 #include <fstream>
 #include <string>
-#include <set>
 #include <regex>
+#include <pthread.h>
 
 using namespace pxr;
 
-struct usdFileData{
+struct usdFileData {
     std::vector<std::string> objects;
-    bool operator<(const usdFileData& other) const {
-        return objects < other.objects;
-    }
+    std::string nameOfFile;
+
 };
 
-class blender_usd_delegate {
+class blender_usd_delegate : public SharedData {
 public:
     blender_usd_delegate(std::string& user);
     blender_usd_delegate(std::string& userSession, std::string& file);
     ~blender_usd_delegate();
 
     bool saveFile();
-    UsdStageRefPtr _createFile();
+    UsdStageRefPtr _createFile(std::string directory);
     std::string saveAs(std::string base_dir, std::string& user);
     std::string loadInFile(std::string& usdFile);
+    void sendToRender();
     UsdStageRefPtr passToBridge(UsdStageRefPtr stge);
+    void writeCache(); 
+    virtual UsdStageRefPtr updateUsd();
 
 private:
+    pthread_mutex_t mutex;
+    std::string currentDirectory = "";
+    bool fileSaved = false;
     std::string usdFile;
     std::string userSession;
     UsdStageRefPtr stage;

@@ -53,9 +53,12 @@ public:
 
     void handleRequest(const std::string& jsonFile);
     void addEntry(const std::string& sessionName, const std::string& usdFile);
-    std::string getEntry(const std::string& sessionName);
+    std::string shareUsd();
     void removeEntry(const std::string& sessionName);
-    void printAll();
+    virtual void printAll();
+    virtual void startServer();
+    virtual std::string getEntry(const std::string& sessionName);
+    virtual std::string updateUsd();
 
 private:
     std::unordered_map<std::string, std::string> session_to_usd_path;
